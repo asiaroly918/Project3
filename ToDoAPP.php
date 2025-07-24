@@ -4,8 +4,8 @@
 const TASK_FILE = 'task.json';
 
 function saveTasks(array$task):void
-{
-     file_put_contents(TASK_FILE, jeson_encode($task,JESON_PRETTY_PRINT)) ;
+{ 
+    file_put_contents(filename: TASK_FILE, data: json_encode(value: $tasks, flags: JSON_PRETTY_PRINT));
 }
 
 function lodeTask(){
@@ -27,8 +27,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         saveTasks($task) ;
         header(' Location:' .$_SERVER['PHP_SELF']) ;
         exit ;
+    } elseif (isset($_POST['toggle'])) {
+        $index = $_POST['toggle'];
+        if (isset($tasks[$index])) {
+            $tasks[$index]['done'] = !$tasks[$index]['done'];
+            savetasks($tasks);
+        }
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
     }
 }
+?>
+
 
 
 <!-- UI -->
