@@ -35,6 +35,13 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         }
         header('Location: ' . $_SERVER['PHP_SELF']);
         exit;
+    } elseif (isset($_POST['delet'])) {
+        unset($tasks[$_POST['delet']]);
+        $task= array_values(array : $tasks);
+        saveTasks($tasks);
+        header('Location :' .$_SERVER[PHP_SELF]);
+        exit ;
+
     }
 }
 ?>
@@ -127,10 +134,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
                 <button type="submit" class="button button-outline" style="margin-left: 10px;">Delete</button>
                      </form>
                         </li>
+                <?php endforeach; ?>
+                <?php endif; ?>
 
             </ul>
 
         </div>
-    </div>
+    </div>   
+<!-- Code injected by live-server -->
+<script>
+
 </body>
 </html>
